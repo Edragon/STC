@@ -1,0 +1,89 @@
+C51 COMPILER V9.56.0.0   SERIAL_1                                                          05/28/2021 21:19:35 PAGE 1   
+
+
+C51 COMPILER V9.56.0.0, COMPILATION OF MODULE SERIAL_1
+OBJECT MODULE PLACED IN Serial-1.OBJ
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE Serial-1.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND TABS(2)
+
+line level    source
+
+   1          #include "STC8F2K.h"
+   2          #include "intrins.h"
+   3          
+   4          #define FOSC            24000000UL
+   5          #define BRT             (65536 - FOSC / 115200 / 4)
+   6          
+   7          sfr     AUXR        =   0x8e;
+*** ERROR C231 IN LINE 7 OF Serial-1.c: 'AUXR': redefinition
+   8          sfr     T2H         =   0xd6;
+*** ERROR C231 IN LINE 8 OF Serial-1.c: 'T2H': redefinition
+   9          sfr     T2L         =   0xd7;
+*** ERROR C231 IN LINE 9 OF Serial-1.c: 'T2L': redefinition
+  10          
+  11          bit busy;
+  12          char wptr;
+  13          char rptr;
+  14          char buffer[16];
+  15          
+  16          void UartIsr() interrupt 4
+  17          {
+  18   1          if (TI)
+  19   1          {
+  20   2              TI = 0;
+  21   2              busy = 0;
+  22   2          }
+  23   1          if (RI)
+  24   1          {
+  25   2              RI = 0;
+  26   2              buffer[wptr++] = SBUF;
+  27   2              wptr &= 0x0f;
+  28   2          }
+  29   1      }
+  30          
+  31          void UartInit()
+  32          {
+  33   1          SCON = 0x50;
+  34   1          T2L = BRT;
+  35   1          T2H = BRT >> 8;
+  36   1          AUXR = 0x15;
+  37   1          wptr = 0x00;
+  38   1          rptr = 0x00;
+  39   1          busy = 0;
+  40   1      }
+  41          
+  42          void UartSend(char dat)
+  43          {
+  44   1          while (busy);
+  45   1          busy = 1;
+  46   1          SBUF = dat;
+  47   1      }
+  48          
+  49          void UartSendStr(char *p)
+  50          {
+  51   1          while (*p)
+  52   1          {
+C51 COMPILER V9.56.0.0   SERIAL_1                                                          05/28/2021 21:19:35 PAGE 2   
+
+  53   2              UartSend(*p++);
+  54   2          }
+  55   1      }
+  56          
+  57          void main()
+  58          {
+  59   1          UartInit();
+  60   1          ES = 1;
+  61   1          EA = 1;
+  62   1          UartSendStr("Uart Test !\r\n");
+  63   1      
+  64   1          while (1)
+  65   1          {
+  66   2              if (rptr != wptr)
+  67   2              {
+  68   3                  UartSend(buffer[rptr++]);
+  69   3                  rptr &= 0x0f;
+  70   3              }
+  71   2          }
+  72   1      }
+  73          
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  3 ERROR(S)

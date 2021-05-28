@@ -1,0 +1,167 @@
+BL51 BANKED LINKER/LOCATER V6.22                                                        05/28/2021  21:19:16  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22, INVOKED BY:
+C:\KEIL_V5\C51\BIN\BL51.EXE Serial-1.obj TO Serial-1 RAMSIZE (256)
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  Serial-1.obj (SERIAL_1)
+  C:\KEIL_V5\C51\LIB\C51S.LIB (?C_STARTUP)
+  C:\KEIL_V5\C51\LIB\C51S.LIB (?C?CLDPTR)
+
+
+LINK MAP OF MODULE:  Serial-1 (SERIAL_1)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     0012H     UNIT         ?DT?SERIAL_1
+            DATA    001AH     0003H     UNIT         _DATA_GROUP_
+                    001DH     0003H                  *** GAP ***
+            BIT     0020H.0   0000H.1   UNIT         ?BI?SERIAL_1
+                    0020H.1   0000H.7                *** GAP ***
+            IDATA   0021H     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+            CODE    0003H     0019H     UNIT         ?C?LIB_CODE
+                    001CH     0007H                  *** GAP ***
+            CODE    0023H     0003H     ABSOLUTE     
+            CODE    0026H     002DH     UNIT         ?PR?UARTISR?SERIAL_1
+            CODE    0053H     0028H     UNIT         ?PR?MAIN?SERIAL_1
+            CODE    007BH     0025H     UNIT         ?PR?_UARTSENDSTR?SERIAL_1
+            CODE    00A0H     0014H     UNIT         ?PR?UARTINIT?SERIAL_1
+            CODE    00B4H     000EH     UNIT         ?CO?SERIAL_1
+            CODE    00C2H     000CH     UNIT         ?C_C51STARTUP
+            CODE    00CEH     0008H     UNIT         ?PR?_UARTSEND?SERIAL_1
+
+
+
+OVERLAY MAP OF MODULE:   Serial-1 (SERIAL_1)
+
+
+SEGMENT                             DATA_GROUP 
+  +--> CALLED SEGMENT             START    LENGTH
+-------------------------------------------------
+?C_C51STARTUP                     -----    -----
+  +--> ?PR?MAIN?SERIAL_1
+
+?PR?MAIN?SERIAL_1                 -----    -----
+  +--> ?PR?UARTINIT?SERIAL_1
+  +--> ?CO?SERIAL_1
+  +--> ?PR?_UARTSENDSTR?SERIAL_1
+  +--> ?PR?_UARTSEND?SERIAL_1
+
+BL51 BANKED LINKER/LOCATER V6.22                                                      05/28/2021  21:19:16  PAGE 2
+
+
+?PR?_UARTSENDSTR?SERIAL_1         001AH    0003H
+  +--> ?PR?_UARTSEND?SERIAL_1
+
+
+
+SYMBOL TABLE OF MODULE:  Serial-1 (SERIAL_1)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        SERIAL_1
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  B:00A8H.7       PUBLIC        EA
+  B:00A8H.4       PUBLIC        ES
+  B:0098H.0       PUBLIC        RI
+  B:0098H.1       PUBLIC        TI
+  C:0053H         PUBLIC        main
+  C:00CEH         PUBLIC        _UartSend
+  D:0099H         PUBLIC        SBUF
+  D:0098H         PUBLIC        SCON
+  C:00A0H         PUBLIC        UartInit
+  D:008EH         PUBLIC        AUXR
+  B:0020H.0       PUBLIC        busy
+  D:0008H         PUBLIC        rptr
+  C:0026H         PUBLIC        UartIsr
+  D:00D6H         PUBLIC        T2H
+  D:0009H         PUBLIC        wptr
+  D:00D7H         PUBLIC        T2L
+  C:007BH         PUBLIC        _UartSendStr
+  D:000AH         PUBLIC        buffer
+  -------         PROC          UARTISR
+  C:0026H         LINE#         16
+  C:0031H         LINE#         18
+  C:0034H         LINE#         19
+  C:0034H         LINE#         20
+  C:0036H         LINE#         21
+  C:0038H         LINE#         22
+  C:0038H         LINE#         23
+  C:003BH         LINE#         24
+  C:003BH         LINE#         25
+  C:003DH         LINE#         26
+  C:0047H         LINE#         27
+  C:004AH         LINE#         28
+  C:004AH         LINE#         29
+  -------         ENDPROC       UARTISR
+  -------         PROC          UARTINIT
+  C:00A0H         LINE#         31
+  C:00A0H         LINE#         32
+  C:00A0H         LINE#         33
+  C:00A3H         LINE#         34
+  C:00A6H         LINE#         35
+  C:00A9H         LINE#         36
+  C:00ACH         LINE#         37
+  C:00AFH         LINE#         38
+  C:00B1H         LINE#         39
+  C:00B3H         LINE#         40
+  -------         ENDPROC       UARTINIT
+BL51 BANKED LINKER/LOCATER V6.22                                                      05/28/2021  21:19:16  PAGE 3
+
+
+  -------         PROC          _UARTSEND
+  D:0007H         SYMBOL        dat
+  C:00CEH         LINE#         42
+  C:00CEH         LINE#         43
+  C:00CEH         LINE#         44
+  C:00D1H         LINE#         45
+  C:00D3H         LINE#         46
+  C:00D5H         LINE#         47
+  -------         ENDPROC       _UARTSEND
+  -------         PROC          _UARTSENDSTR
+  D:001AH         SYMBOL        p
+  C:007BH         LINE#         49
+  C:0081H         LINE#         50
+  C:0081H         LINE#         51
+  C:008CH         LINE#         52
+  C:008CH         LINE#         53
+  C:009DH         LINE#         54
+  C:009FH         LINE#         55
+  -------         ENDPROC       _UARTSENDSTR
+  -------         PROC          MAIN
+  C:0053H         LINE#         57
+  C:0053H         LINE#         58
+  C:0053H         LINE#         59
+  C:0056H         LINE#         60
+  C:0058H         LINE#         61
+  C:005AH         LINE#         62
+  C:0063H         LINE#         64
+  C:0063H         LINE#         65
+  C:0063H         LINE#         66
+  C:0069H         LINE#         67
+  C:0069H         LINE#         68
+  C:0076H         LINE#         69
+  C:0079H         LINE#         70
+  C:0079H         LINE#         71
+  -------         ENDPROC       MAIN
+  -------         ENDMOD        SERIAL_1
+
+  -------         MODULE        ?C?CLDPTR
+  C:0003H         PUBLIC        ?C?CLDPTR
+  -------         ENDMOD        ?C?CLDPTR
+
+Program Size: data=30.1 xdata=0 code=207
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

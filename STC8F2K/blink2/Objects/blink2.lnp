@@ -1,0 +1,6 @@
+".\Objects\STARTUP.obj",
+".\Objects\GPIO.obj",
+".\Objects\bsp_delay.obj" 
+TO ".\Objects\blink2" 
+PRINT(".\Listings\blink2.m51") RAMSIZE(256) 
+DISABLEWARNING (16) 

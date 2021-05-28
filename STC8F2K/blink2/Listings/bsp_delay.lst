@@ -1,0 +1,95 @@
+C51 COMPILER V9.56.0.0   BSP_DELAY                                                         05/28/2021 21:27:22 PAGE 1   
+
+
+C51 COMPILER V9.56.0.0, COMPILATION OF MODULE BSP_DELAY
+OBJECT MODULE PLACED IN .\Objects\bsp_delay.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE bsp_delay.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings
+                    -\bsp_delay.lst) TABS(2) OBJECT(.\Objects\bsp_delay.obj)
+
+line level    source
+
+   1          #include "STC8F2K.h"
+   2          #include "intrins.h"
+   3          
+   4          
+   5          void Delay1ms()   //@24.000MHz
+   6          {
+   7   1        unsigned char i, j;
+   8   1      
+   9   1        i = 24;
+  10   1        j = 85;
+  11   1        do
+  12   1        {
+  13   2          while (--j);
+  14   2        } while (--i);
+  15   1      }
+  16          
+  17          void Delay10ms()    //@24.000MHz
+  18          {
+  19   1        unsigned char i, j, k;
+  20   1      
+  21   1        _nop_();
+  22   1        _nop_();
+  23   1        i = 1;
+  24   1        j = 234;
+  25   1        k = 113;
+  26   1        do
+  27   1        {
+  28   2          do
+  29   2          {
+  30   3            while (--k);
+  31   3          } while (--j);
+  32   2        } while (--i);
+  33   1      }
+  34          
+  35          void Delay100ms()   //@24.000MHz
+  36          {
+  37   1        unsigned char i, j, k;
+  38   1      
+  39   1        _nop_();
+  40   1        _nop_();
+  41   1        i = 10;
+  42   1        j = 31;
+  43   1        k = 147;
+  44   1        do
+  45   1        {
+  46   2          do
+  47   2          {
+  48   3            while (--k);
+  49   3          } while (--j);
+  50   2        } while (--i);
+  51   1      }
+  52          
+  53          void Delay1000ms()    //@24.000MHz
+  54          {
+C51 COMPILER V9.56.0.0   BSP_DELAY                                                         05/28/2021 21:27:22 PAGE 2   
+
+  55   1        unsigned char i, j, k;
+  56   1      
+  57   1        _nop_();
+  58   1        _nop_();
+  59   1        i = 92;
+  60   1        j = 50;
+  61   1        k = 238;
+  62   1        do
+  63   1        {
+  64   2          do
+  65   2          {
+  66   3            while (--k);
+  67   3          } while (--j);
+  68   2        } while (--i);
+  69   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     54    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
