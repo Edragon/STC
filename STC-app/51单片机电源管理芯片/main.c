@@ -1,3 +1,56 @@
+/**
+ * STC8G Power Management Chip Firmware
+ * 
+ * DESCRIPTION:
+ * This firmware implements a power management system for STC8G microcontroller.
+ * It manages power states, battery monitoring, charging detection, and USB mode switching.
+ * 
+ * FEATURES:
+ * - Power management with sleep/wake functionality
+ * - Battery voltage monitoring via ADC using internal 1.19V reference
+ * - Charging status detection
+ * - Key press detection for power on/off control
+ * - UART communication for remote commands and data transmission
+ * - USB mode switching (Normal/WiFi Camera/Direct modes) - currently disabled
+ * 
+ * HARDWARE CONNECTIONS:
+ * - P3.2: Power button (PIN_KEY) - active low
+ * - P3.3: Power enable (PMU_EN) - controls main power
+ * - P5.4: Charging indicator (PIN_CHARGING) - low when charging
+ * - P5.5: USB switch 1 (USB_SWITCH1) - unused
+ * - P5.6: USB switch 2 (USB_SWITCH2) - unused
+ * 
+ * UART COMMANDS:
+ * - 0x58: Request ADC reading (battery voltage)
+ * - 0x59: Request charging status
+ * - 0x6A: Power off request
+ * - 0x11: Set USB mode to normal (disabled)
+ * - 0x12: Set USB mode to WiFi camera (disabled)
+ * - 0x13: Set USB mode to direct (disabled)
+ * 
+ * OPERATION:
+ * 1. System starts in sleep mode
+ * 2. Long press (900ms) on power button wakes system
+ * 3. System initializes ADC and UART
+ * 4. Responds to UART commands for voltage/charging queries
+ * 5. Long press (9.5s) on power button or UART command puts system to sleep
+ * 
+ * POWER STATES:
+ * - Sleep: Low power mode, only INT0 interrupt active
+ * - Active: Full operation with ADC and UART enabled
+ * 
+ * ADC OPERATION:
+ * - Uses internal 1.19V reference voltage
+ * - 10-bit resolution
+ * - Averages 8 readings for accuracy
+ * - Calculates VCC voltage in millivolts
+ * 
+ * Author: [Original author unknown]
+ * MCU: STC8G series
+ * Clock: 11.0592MHz
+ * UART: 115200 baud, 8N1
+ */
+
 #include "intrins.h"
 #include <STC8G.H>
 
